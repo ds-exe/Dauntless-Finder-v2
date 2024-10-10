@@ -1,6 +1,6 @@
-﻿using Dauntless_Finder_v2.src.Enums;
+﻿using Shared.src.Enums;
 
-namespace Dauntless_Finder_v2.src.Models;
+namespace Shared.src.Models;
 
 public class Armour
 {

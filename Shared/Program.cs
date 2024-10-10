@@ -1,4 +1,4 @@
-﻿namespace Dauntless_Finder_v2_data;
+﻿namespace Shared;
 
 public class Program
 {

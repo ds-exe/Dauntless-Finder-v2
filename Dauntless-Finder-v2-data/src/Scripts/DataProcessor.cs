@@ -1,10 +1,10 @@
 ﻿using CsvHelper;
-using Dauntless_Finder_v2.src.Enums;
-using Dauntless_Finder_v2.src.Models;
+using Shared.src.Enums;
+using Shared.src.Models;
 using System.Globalization;
 using System.Text.Json;
 
-namespace Dauntless_Finder_v2.src.Scripts;
+namespace Dauntless_Finder_v2_data.src.Scripts;
 
 public class DataProcessor
 {

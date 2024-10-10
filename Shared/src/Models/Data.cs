@@ -1,4 +1,4 @@
-﻿namespace Dauntless_Finder_v2.src.Models;
+﻿namespace Shared.src.Models;
 
 public class Data
 {
