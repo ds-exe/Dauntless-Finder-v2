@@ -1,25 +1,21 @@
 ﻿using CsvHelper;
-using Dauntless_Finder_v2.Models;
+using Dauntless_Finder_v2.src.Enums;
+using Dauntless_Finder_v2.src.Models;
 using System.Globalization;
 using System.Text.Json;
 
-namespace Dauntless_Finder_v2;
+namespace Dauntless_Finder_v2.src.Scripts;
 
 public class GetData
 {
-    public static async Task<Data?> FetchData()
+    public static Data FetchData()
     {
-        if (File.Exists("data.json"))
-        {
-            return await ReadData();
-        }
-
         Data data = ReadCSVData();
         WriteData(data);
         return data;
     }
 
-    static Data ReadCSVData()
+    private static Data ReadCSVData()
     {
         using (var reader = new StreamReader("Armor-Data.csv"))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
@@ -27,15 +23,16 @@ public class GetData
             var records = csv.GetRecords<CSVData>();
 
             var data = new Data();
-            data.Helms = new List<Armour>();
-            data.Torsos = new List<Armour>();
-            data.Arms = new List<Armour>();
-            data.Legs = new List<Armour>();
+            data.Armour = new List<Armour>();
+
+            int id = 0;
             foreach (var record in records)
             {
-                data.Helms.Add(new Armour
+                data.Armour.Add(new Armour
                 {
+                    Id = id++,
                     Name = record.Name,
+                    Type = ArmourType.Helm,
                     Element = record.Element,
                     Perks = new Dictionary<string, int>()
                     {
@@ -46,9 +43,11 @@ public class GetData
                     CellSlots = 1
                 });
 
-                data.Torsos.Add(new Armour
+                data.Armour.Add(new Armour
                 {
+                    Id = id++,
                     Name = record.Name,
+                    Type = ArmourType.Torso,
                     Element = record.Element,
                     Perks = new Dictionary<string, int>()
                     {
@@ -58,9 +57,11 @@ public class GetData
                     CellSlots = 2
                 });
 
-                data.Arms.Add(new Armour
+                data.Armour.Add(new Armour
                 {
+                    Id = id++,
                     Name = record.Name,
+                    Type= ArmourType.Arms,
                     Element = record.Element,
                     Perks = new Dictionary<string, int>()
                     {
@@ -71,9 +72,11 @@ public class GetData
                     CellSlots = 1
                 });
 
-                data.Legs.Add(new Armour
+                data.Armour.Add(new Armour
                 {
+                    Id = id++,
                     Name = record.Name,
+                    Type = ArmourType.Legs,
                     Element = record.Element,
                     Perks = new Dictionary<string, int>()
                     {
@@ -88,13 +91,13 @@ public class GetData
         }
     }
 
-    static void WriteData(Data data)
+    private static void WriteData(Data data)
     {
         string json = JsonSerializer.Serialize(data);
         File.WriteAllText("data.json", json);
     }
 
-    static async Task<Data?> ReadData()
+    public static async Task<Data?> ReadData()
     {
         using (FileStream stream = File.OpenRead("data.json"))
         {

@@ -1,8 +1,14 @@
-﻿namespace Dauntless_Finder_v2.Models;
+﻿using Dauntless_Finder_v2.src.Enums;
+
+namespace Dauntless_Finder_v2.src.Models;
 
 public class Armour
 {
+    public int Id { get; set; }
+
     public string Name { get; set; }
+
+    public ArmourType Type { get; set; }
 
     public string Element { get; set; }
 
