@@ -6,12 +6,10 @@ public class Program
 {
     private static void Main(string[] args)
     {
-        Data? data = GetData.FetchData();
+        Data? data = DataProcessor.GenerateJsonData();
         if (data == null)
         {
             return;
         }
-
-
     }
 }

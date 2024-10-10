@@ -6,9 +6,9 @@ using System.Text.Json;
 
 namespace Dauntless_Finder_v2.src.Scripts;
 
-public class GetData
+public class DataProcessor
 {
-    public static Data FetchData()
+    public static Data GenerateJsonData()
     {
         Data data = ReadCSVData();
         WriteData(data);
@@ -17,7 +17,7 @@ public class GetData
 
     private static Data ReadCSVData()
     {
-        using (var reader = new StreamReader("Armor-Data.csv"))
+        using (var reader = new StreamReader("Armour-Data.csv"))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
             var records = csv.GetRecords<CSVData>().ToList();
@@ -130,14 +130,12 @@ public class GetData
     private static void WriteData(Data data)
     {
         string json = JsonSerializer.Serialize(data);
-        File.WriteAllText("data.json", json);
-    }
+        string filepath = "data.json";
 
-    public static async Task<Data?> ReadData()
-    {
-        using (FileStream stream = File.OpenRead("data.json"))
-        {
-            return await JsonSerializer.DeserializeAsync<Data>(stream);
-        }
+        #if DEBUG
+        filepath = "../../../../Dauntless-Finder-v2/data.json";
+        #endif
+
+        File.WriteAllText(filepath, json);
     }
 }
