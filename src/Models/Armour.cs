@@ -12,7 +12,7 @@ public class Armour
 
     public string Element { get; set; }
 
-    public Dictionary<string, int> Perks { get; set; }
+    public Dictionary<int, int> Perks { get; set; }
 
     public int CellSlots { get; set; }
 }

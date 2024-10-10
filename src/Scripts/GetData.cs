@@ -20,74 +20,110 @@ public class GetData
         using (var reader = new StreamReader("Armor-Data.csv"))
         using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
         {
-            var records = csv.GetRecords<CSVData>();
+            var records = csv.GetRecords<CSVData>().ToList();
 
             var data = new Data();
-            data.Armour = new List<Armour>();
-
-            int id = 0;
-            foreach (var record in records)
-            {
-                data.Armour.Add(new Armour
-                {
-                    Id = id++,
-                    Name = record.Name,
-                    Type = ArmourType.Helm,
-                    Element = record.Element,
-                    Perks = new Dictionary<string, int>()
-                    {
-                        [record.A] = 2,
-                        [record.B] = 3,
-                        [record.C] = 2
-                    },
-                    CellSlots = 1
-                });
-
-                data.Armour.Add(new Armour
-                {
-                    Id = id++,
-                    Name = record.Name,
-                    Type = ArmourType.Torso,
-                    Element = record.Element,
-                    Perks = new Dictionary<string, int>()
-                    {
-                        [record.A] = 3,
-                        [record.B] = 2
-                    },
-                    CellSlots = 2
-                });
-
-                data.Armour.Add(new Armour
-                {
-                    Id = id++,
-                    Name = record.Name,
-                    Type= ArmourType.Arms,
-                    Element = record.Element,
-                    Perks = new Dictionary<string, int>()
-                    {
-                        [record.A] = 2,
-                        [record.B] = 2,
-                        [record.C] = 2
-                    },
-                    CellSlots = 1
-                });
-
-                data.Armour.Add(new Armour
-                {
-                    Id = id++,
-                    Name = record.Name,
-                    Type = ArmourType.Legs,
-                    Element = record.Element,
-                    Perks = new Dictionary<string, int>()
-                    {
-                        [record.A] = 3,
-                        [record.D] = 2
-                    },
-                    CellSlots = 2
-                });
-            }
-
+            AddPerks(data, records);
+            AddArmour(data, records);
             return data;
+        }
+    }
+
+    private static void AddPerks(Data data, IEnumerable<CSVData> records)
+    {
+        data.Perks = new Dictionary<int, string>();
+
+        int id = 0;
+        foreach (var record in records)
+        {
+            if (!data.Perks.ContainsValue(record.A))
+            {
+                data.Perks.Add(id++, record.A);
+            }
+            if (!data.Perks.ContainsValue(record.B))
+            {
+                data.Perks.Add(id++, record.B);
+            }
+            if (!data.Perks.ContainsValue(record.C))
+            {
+                data.Perks.Add(id++, record.C);
+            }
+            if (!data.Perks.ContainsValue(record.D))
+            {
+                data.Perks.Add(id++, record.D);
+            }
+        }
+    }
+
+    private static void AddArmour(Data data, IEnumerable<CSVData> records)
+    {
+        data.Armour = new Dictionary<int, Armour>();
+        Dictionary<string, int> perkValues = new Dictionary<string, int>();
+        foreach (var perk in data.Perks)
+        {
+            perkValues.Add(perk.Value, perk.Key);
+        }
+
+        int id = 0;
+        foreach (var record in records)
+        {
+            data.Armour[id] = new Armour
+            {
+                Id = id++,
+                Name = record.Name,
+                Type = ArmourType.Helm,
+                Element = record.Element,
+                Perks = new Dictionary<int, int>()
+                {
+                    [perkValues[record.A]] = 2,
+                    [perkValues[record.B]] = 3,
+                    [perkValues[record.C]] = 2
+                },
+                CellSlots = 1
+            };
+
+            data.Armour[id] = new Armour
+            {
+                Id = id++,
+                Name = record.Name,
+                Type = ArmourType.Torso,
+                Element = record.Element,
+                Perks = new Dictionary<int, int>()
+                {
+                    [perkValues[record.A]] = 3,
+                    [perkValues[record.B]] = 2
+                },
+                CellSlots = 2
+            };
+
+            data.Armour[id] = new Armour
+            {
+                Id = id++,
+                Name = record.Name,
+                Type = ArmourType.Arms,
+                Element = record.Element,
+                Perks = new Dictionary<int, int>()
+                {
+                    [perkValues[record.A]] = 2,
+                    [perkValues[record.B]] = 2,
+                    [perkValues[record.C]] = 2
+                },
+                CellSlots = 1
+            };
+
+            data.Armour[id] = new Armour
+            {
+                Id = id++,
+                Name = record.Name,
+                Type = ArmourType.Legs,
+                Element = record.Element,
+                Perks = new Dictionary<int, int>()
+                {
+                    [perkValues[record.A]] = 3,
+                    [perkValues[record.D]] = 2
+                },
+                CellSlots = 2
+            };
         }
     }
 

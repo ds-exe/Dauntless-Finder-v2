@@ -2,5 +2,7 @@
 
 public class Data
 {
-    public List<Armour> Armour { get; set; }
+    public Dictionary<int, Armour> Armour { get; set; }
+
+    public Dictionary<int, string> Perks { get; set; }
 }
