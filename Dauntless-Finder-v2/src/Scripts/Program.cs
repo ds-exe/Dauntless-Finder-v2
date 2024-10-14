@@ -8,7 +8,24 @@ public class Program
     private static void Main(string[] args)
     {
         ArmourData? data = ReadData();
-        //var armour = data?.Armour;
+        if (data == null)
+        {
+            Console.WriteLine("Loading data failed.");
+            return;
+        }
+
+        // Run test for now, eventually replace with proper testing / benchmarks
+        Test(data);
+    }
+
+    private static void Test(ArmourData data)
+    {
+        var watch = System.Diagnostics.Stopwatch.StartNew();
+
+        // Do Perk Checker
+
+        watch.Stop();
+        Console.WriteLine($"Time to Check: {watch.ElapsedMilliseconds}");
     }
 
     public static ArmourData? ReadData()
