@@ -37,60 +37,60 @@ public class GenerateIndexedData
         {
             case ArmourType.Helm:
                 InitialiseDictionary(armourData.Helms, perks[0].Key, perks[1].Key, perks[2].Key);
-                armourData.Helms[perks[0].Key][perks[1].Key][perks[2].Key].Add(armour);
+                armourData.Helms[perks[0].Key][perks[1].Key][perks[2].Key].Add(armour.Id);
                 InitialiseDictionary(armourData.Helms, perks[1].Key, perks[2].Key, perks[0].Key);
-                armourData.Helms[perks[1].Key][perks[2].Key][perks[0].Key].Add(armour);
+                armourData.Helms[perks[1].Key][perks[2].Key][perks[0].Key].Add(armour.Id);
                 InitialiseDictionary(armourData.Helms, perks[2].Key, perks[0].Key, perks[1].Key);
-                armourData.Helms[perks[2].Key][perks[0].Key][perks[1].Key].Add(armour);
+                armourData.Helms[perks[2].Key][perks[0].Key][perks[1].Key].Add(armour.Id);
                 break;
             case ArmourType.Torso:
                 InitialiseDictionary(armourData.Torsos, perks[0].Key, perks[1].Key);
-                armourData.Torsos[perks[0].Key][perks[1].Key].Add(armour);
+                armourData.Torsos[perks[0].Key][perks[1].Key].Add(armour.Id);
                 InitialiseDictionary(armourData.Torsos, perks[1].Key, perks[0].Key);
-                armourData.Torsos[perks[1].Key][perks[0].Key].Add(armour);
+                armourData.Torsos[perks[1].Key][perks[0].Key].Add(armour.Id);
                 break;
             case ArmourType.Arms:
                 InitialiseDictionary(armourData.Arms, perks[0].Key, perks[1].Key, perks[2].Key);
-                armourData.Arms[perks[0].Key][perks[1].Key][perks[2].Key].Add(armour);
+                armourData.Arms[perks[0].Key][perks[1].Key][perks[2].Key].Add(armour.Id);
                 InitialiseDictionary(armourData.Arms, perks[1].Key, perks[2].Key, perks[0].Key);
-                armourData.Arms[perks[1].Key][perks[2].Key][perks[0].Key].Add(armour);
+                armourData.Arms[perks[1].Key][perks[2].Key][perks[0].Key].Add(armour.Id);
                 InitialiseDictionary(armourData.Arms, perks[2].Key, perks[0].Key, perks[1].Key);
-                armourData.Arms[perks[2].Key][perks[0].Key][perks[1].Key].Add(armour);
+                armourData.Arms[perks[2].Key][perks[0].Key][perks[1].Key].Add(armour.Id);
                 break;
             case ArmourType.Legs:
                 InitialiseDictionary(armourData.Legs, perks[0].Key, perks[1].Key);
-                armourData.Legs[perks[0].Key][perks[1].Key].Add(armour);
+                armourData.Legs[perks[0].Key][perks[1].Key].Add(armour.Id);
                 InitialiseDictionary(armourData.Legs, perks[1].Key, perks[0].Key);
-                armourData.Legs[perks[1].Key][perks[0].Key].Add(armour);
+                armourData.Legs[perks[1].Key][perks[0].Key].Add(armour.Id);
                 break;
         }
     }
 
-    private static void InitialiseDictionary(Dictionary<int, Dictionary<int, Dictionary<int, List<Armour>>>> dict, int key, int key2, int key3)
+    private static void InitialiseDictionary(Dictionary<int, Dictionary<int, Dictionary<int, List<int>>>> dict, int key, int key2, int key3)
     {
         if (!dict.ContainsKey(key))
         {
-            dict.Add(key, new Dictionary<int, Dictionary<int, List<Armour>>>());
+            dict.Add(key, new Dictionary<int, Dictionary<int, List<int>>>());
         }
 
         InitialiseDictionary(dict[key], key2, key3);
     }
 
-    private static void InitialiseDictionary(Dictionary<int, Dictionary<int, List<Armour>>> dict, int key, int key2)
+    private static void InitialiseDictionary(Dictionary<int, Dictionary<int, List<int>>> dict, int key, int key2)
     {
         if (!dict.ContainsKey(key))
         {
-            dict.Add(key, new Dictionary<int, List<Armour>>());
+            dict.Add(key, new Dictionary<int, List<int>>());
         }
 
         InitialiseDictionary(dict[key], key2);
     }
 
-    private static void InitialiseDictionary(Dictionary<int, List<Armour>> dict, int key)
+    private static void InitialiseDictionary(Dictionary<int, List<int>> dict, int key)
     {
         if (!dict.ContainsKey(key))
         {
-            dict.Add(key, new List<Armour>());
+            dict.Add(key, new List<int>());
         }
     }
 
