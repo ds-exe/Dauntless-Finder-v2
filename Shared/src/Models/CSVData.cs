@@ -1,4 +1,4 @@
-namespace Shared.src.Models;
+namespace Dauntless_Finder_v2.Shared.src.Models;
 
 public class CSVData
 {

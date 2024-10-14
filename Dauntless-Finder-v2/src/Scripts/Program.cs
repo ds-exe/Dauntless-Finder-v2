@@ -1,25 +1,25 @@
-﻿using Shared.src.Models;
+﻿using Dauntless_Finder_v2.Shared.src.Models;
 using System.Text.Json;
 
-namespace Dauntless_Finder_v2.src.Scripts;
+namespace Dauntless_Finder_v2.App.src.Scripts;
 
 public class Program
 {
     private static void Main(string[] args)
     {
-        Data? data = ReadData();
-        var armour = data?.Armour;
+        ArmourData? data = ReadData();
+        //var armour = data?.Armour;
     }
 
-    private static Data? ReadData()
+    public static ArmourData? ReadData()
     {
-        string filepath = "data.json";
+        string filepath = "armour-data.json";
         #if DEBUG
-        filepath = "../../../data.json";
+        filepath = "../../../armour-data.json";
         #endif
 
         string txt = File.ReadAllText(filepath);
-        Data? result = JsonSerializer.Deserialize<Data>(txt);
+        ArmourData? result = JsonSerializer.Deserialize<ArmourData>(txt);
         return result;
     }
 }

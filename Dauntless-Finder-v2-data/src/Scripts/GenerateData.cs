@@ -1,18 +1,17 @@
 ﻿using CsvHelper;
-using Shared.src.Enums;
-using Shared.src.Models;
+using Dauntless_Finder_v2.Shared.src.Enums;
+using Dauntless_Finder_v2.Shared.src.Models;
 using System.Globalization;
 using System.Text.Json;
 
-namespace Dauntless_Finder_v2_data.src.Scripts;
+namespace Dauntless_Finder_v2.DataHandler.src.Scripts;
 
-public class DataProcessor
+public class GenerateData
 {
-    public static Data GenerateJsonData()
+    public static void GenerateJsonData()
     {
         Data data = ReadCSVData();
         WriteData(data);
-        return data;
     }
 
     private static Data ReadCSVData()
@@ -71,7 +70,7 @@ public class DataProcessor
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.Helm,
+                ArmourType = ArmourType.Helm,
                 Element = record.Element,
                 Perks = new Dictionary<int, int>()
                 {
@@ -86,7 +85,7 @@ public class DataProcessor
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.Torso,
+                ArmourType = ArmourType.Torso,
                 Element = record.Element,
                 Perks = new Dictionary<int, int>()
                 {
@@ -100,7 +99,7 @@ public class DataProcessor
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.Arms,
+                ArmourType = ArmourType.Arms,
                 Element = record.Element,
                 Perks = new Dictionary<int, int>()
                 {
@@ -115,7 +114,7 @@ public class DataProcessor
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.Legs,
+                ArmourType = ArmourType.Legs,
                 Element = record.Element,
                 Perks = new Dictionary<int, int>()
                 {

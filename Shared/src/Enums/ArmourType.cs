@@ -1,4 +1,4 @@
-﻿namespace Shared.src.Enums;
+﻿namespace Dauntless_Finder_v2.Shared.src.Enums;
 
 public enum ArmourType
 {

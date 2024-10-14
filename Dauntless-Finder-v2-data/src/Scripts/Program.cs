@@ -1,15 +1,11 @@
-﻿using Shared.src.Models;
-
-namespace Dauntless_Finder_v2_data.src.Scripts;
+﻿namespace Dauntless_Finder_v2.DataHandler.src.Scripts;
 
 public class Program
 {
     private static void Main(string[] args)
     {
-        Data? data = DataProcessor.GenerateJsonData();
-        if (data == null)
-        {
-            return;
-        }
+        GenerateData.GenerateJsonData();
+
+        GenerateIndexedData.GenerateArmourData();
     }
 }

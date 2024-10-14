@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless-Finder-v2", "Dauntless-Finder-v2\Dauntless-Finder-v2.csproj", "{C1F34B18-D5A0-4D3E-B512-F1ACD2C85907}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless_Finder_v2.App", "Dauntless-Finder-v2\Dauntless_Finder_v2.App.csproj", "{C1F34B18-D5A0-4D3E-B512-F1ACD2C85907}"
 	ProjectSection(ProjectDependencies) = postProject
 		{554947AF-FA79-4BDC-ADB7-C65A4C7A46D1} = {554947AF-FA79-4BDC-ADB7-C65A4C7A46D1}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless-Finder-v2-data", "Dauntless-Finder-v2-data\Dauntless-Finder-v2-data.csproj", "{CAF15D55-EA5D-4D2D-BF57-42969594F672}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless_Finder_v2.DataHandler", "Dauntless-Finder-v2-data\Dauntless_Finder_v2.DataHandler.csproj", "{CAF15D55-EA5D-4D2D-BF57-42969594F672}"
 	ProjectSection(ProjectDependencies) = postProject
 		{554947AF-FA79-4BDC-ADB7-C65A4C7A46D1} = {554947AF-FA79-4BDC-ADB7-C65A4C7A46D1}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{554947AF-FA79-4BDC-ADB7-C65A4C7A46D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless_Finder_v2.Shared", "Shared\Dauntless_Finder_v2.Shared.csproj", "{554947AF-FA79-4BDC-ADB7-C65A4C7A46D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,9 @@
+0 = Aetherhunter
+1 = Fireproof
+2 = Sturdy
+
+Armour => Helm => 0 => 1 => 2 => Charrog Helm
+
+Armour => Helm => 1 => 2 => 0 => Charrog Helm
+
+Armour => Helm => 2 => 0 => 1 => Charrog Helm

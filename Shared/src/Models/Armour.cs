@@ -1,6 +1,6 @@
-﻿using Shared.src.Enums;
+﻿using Dauntless_Finder_v2.Shared.src.Enums;
 
-namespace Shared.src.Models;
+namespace Dauntless_Finder_v2.Shared.src.Models;
 
 public class Armour
 {
@@ -8,7 +8,7 @@ public class Armour
 
     public string Name { get; set; }
 
-    public ArmourType Type { get; set; }
+    public ArmourType ArmourType { get; set; }
 
     public string Element { get; set; }
 
