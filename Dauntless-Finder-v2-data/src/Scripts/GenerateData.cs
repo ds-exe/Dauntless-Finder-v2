@@ -66,7 +66,7 @@ public class GenerateData
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.head,
+                Type = ArmourType.HEAD,
                 Stats = new List<Stat>()
                 {
                     new Stat()
@@ -86,7 +86,7 @@ public class GenerateData
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.torso,
+                Type = ArmourType.TORSO,
                 Stats = new List<Stat>()
                 {
                     new Stat()
@@ -105,7 +105,7 @@ public class GenerateData
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.arms,
+                Type = ArmourType.ARMS,
                 Stats = new List<Stat>()
                 {
                     new Stat()
@@ -125,7 +125,7 @@ public class GenerateData
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.legs,
+                Type = ArmourType.LEGS,
                 Stats = new List<Stat>()
                 {
                     new Stat()

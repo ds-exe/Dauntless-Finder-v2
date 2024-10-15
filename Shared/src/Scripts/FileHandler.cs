@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Dauntless_Finder_v2.Shared.src.Scripts;
 
@@ -13,6 +14,10 @@ public class FileHandler
         var serializeOptions = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+            Converters =
+            {
+                new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+            }
         };
         string txt = File.ReadAllText(path);
         T? result = JsonSerializer.Deserialize<T>(txt, serializeOptions);
@@ -24,6 +29,10 @@ public class FileHandler
         var serializeOptions = new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+            Converters =
+            {
+                new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+            }
         };
         string json = JsonSerializer.Serialize(data, serializeOptions);
 

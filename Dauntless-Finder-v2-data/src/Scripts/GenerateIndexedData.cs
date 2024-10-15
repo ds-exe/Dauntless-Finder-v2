@@ -41,7 +41,7 @@ public class GenerateIndexedData
 
         switch (armour.Type)
         {
-            case ArmourType.head:
+            case ArmourType.HEAD:
                 InitialiseDictionary(armourData.Helms, perks[0].Key, perks[1].Key, perks[2].Key);
                 armourData.Helms[perks[0].Key][perks[1].Key][perks[2].Key].Add(basicArmour);
                 InitialiseDictionary(armourData.Helms, perks[1].Key, perks[2].Key, perks[0].Key);
@@ -49,13 +49,13 @@ public class GenerateIndexedData
                 InitialiseDictionary(armourData.Helms, perks[2].Key, perks[0].Key, perks[1].Key);
                 armourData.Helms[perks[2].Key][perks[0].Key][perks[1].Key].Add(basicArmour);
                 break;
-            case ArmourType.torso:
+            case ArmourType.TORSO:
                 InitialiseDictionary(armourData.Torsos, perks[0].Key, perks[1].Key);
                 armourData.Torsos[perks[0].Key][perks[1].Key].Add(basicArmour);
                 InitialiseDictionary(armourData.Torsos, perks[1].Key, perks[0].Key);
                 armourData.Torsos[perks[1].Key][perks[0].Key].Add(basicArmour);
                 break;
-            case ArmourType.arms:
+            case ArmourType.ARMS:
                 InitialiseDictionary(armourData.Arms, perks[0].Key, perks[1].Key, perks[2].Key);
                 armourData.Arms[perks[0].Key][perks[1].Key][perks[2].Key].Add(basicArmour);
                 InitialiseDictionary(armourData.Arms, perks[1].Key, perks[2].Key, perks[0].Key);
@@ -63,7 +63,7 @@ public class GenerateIndexedData
                 InitialiseDictionary(armourData.Arms, perks[2].Key, perks[0].Key, perks[1].Key);
                 armourData.Arms[perks[2].Key][perks[0].Key][perks[1].Key].Add(basicArmour);
                 break;
-            case ArmourType.legs:
+            case ArmourType.LEGS:
                 InitialiseDictionary(armourData.Legs, perks[0].Key, perks[1].Key);
                 armourData.Legs[perks[0].Key][perks[1].Key].Add(basicArmour);
                 InitialiseDictionary(armourData.Legs, perks[1].Key, perks[0].Key);
