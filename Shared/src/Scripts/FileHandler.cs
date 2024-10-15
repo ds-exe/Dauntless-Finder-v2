@@ -16,7 +16,7 @@ public class FileHandler
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
             Converters =
             {
-                new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+                new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower)
             }
         };
         string txt = File.ReadAllText(path);
@@ -31,7 +31,7 @@ public class FileHandler
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
             Converters =
             {
-                new JsonStringEnumConverter(JsonNamingPolicy.CamelCase)
+                new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower)
             }
         };
         string json = JsonSerializer.Serialize(data, serializeOptions);
