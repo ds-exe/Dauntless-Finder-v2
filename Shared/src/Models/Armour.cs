@@ -8,11 +8,9 @@ public class Armour
 
     public string Name { get; set; }
 
-    public ArmourType ArmourType { get; set; }
+    public ArmourType Type { get; set; }
 
-    public string Element { get; set; }
+    public List<Stat> Stats { get; set; }
 
-    public Dictionary<int, int> Perks { get; set; }
-
-    public int CellSlots { get; set; }
+    public int Cell_Slots { get; set; }
 }
