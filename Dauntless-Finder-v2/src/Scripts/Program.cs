@@ -1,5 +1,5 @@
 ﻿using Dauntless_Finder_v2.Shared.src.Models;
-using System.Text.Json;
+using Dauntless_Finder_v2.Shared.src.Scripts;
 
 namespace Dauntless_Finder_v2.App.src.Scripts;
 
@@ -7,15 +7,16 @@ public class Program
 {
     private static void Main(string[] args)
     {
-        ArmourData? data = ReadData();
-        if (data == null)
+        ArmourData? armourData = FileHandler.ReadData<ArmourData>("armour-data.json");
+        if (armourData == null)
         {
             Console.WriteLine("Loading data failed.");
             return;
         }
+        Data? data = FileHandler.ReadData<Data>("data.json");
 
         // Run test for now, eventually replace with proper testing / benchmarks
-        Test(data);
+        Test(armourData);
     }
 
     private static void Test(ArmourData data)
@@ -26,17 +27,5 @@ public class Program
 
         watch.Stop();
         Console.WriteLine($"Time to Check: {watch.ElapsedMilliseconds}");
-    }
-
-    public static ArmourData? ReadData()
-    {
-        string filepath = "armour-data.json";
-        #if DEBUG
-        filepath = "../../../armour-data.json";
-        #endif
-
-        string txt = File.ReadAllText(filepath);
-        ArmourData? result = JsonSerializer.Deserialize<ArmourData>(txt);
-        return result;
     }
 }

@@ -1,8 +1,8 @@
 ﻿using CsvHelper;
 using Dauntless_Finder_v2.Shared.src.Enums;
 using Dauntless_Finder_v2.Shared.src.Models;
+using Dauntless_Finder_v2.Shared.src.Scripts;
 using System.Globalization;
-using System.Text.Json;
 
 namespace Dauntless_Finder_v2.DataHandler.src.Scripts;
 
@@ -11,7 +11,7 @@ public class GenerateData
     public static void GenerateJsonData()
     {
         Data data = ReadCSVData();
-        WriteData(data);
+        FileHandler.WriteData(data, "data.json");
     }
 
     private static Data ReadCSVData()
@@ -66,7 +66,7 @@ public class GenerateData
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.Head,
+                Type = ArmourType.head,
                 Stats = new List<Stat>()
                 {
                     new Stat()
@@ -79,14 +79,14 @@ public class GenerateData
                         }
                     }
                 },
-                Cell_Slots = 1
+                CellSlots = 1
             };
 
             data.Armours[id] = new Armour
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.Torso,
+                Type = ArmourType.torso,
                 Stats = new List<Stat>()
                 {
                     new Stat()
@@ -98,14 +98,14 @@ public class GenerateData
                         }
                     }
                 },
-                Cell_Slots = 2
+                CellSlots = 2
             };
 
             data.Armours[id] = new Armour
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.Arms,
+                Type = ArmourType.arms,
                 Stats = new List<Stat>()
                 {
                     new Stat()
@@ -118,14 +118,14 @@ public class GenerateData
                         }
                     }
                 },
-                Cell_Slots = 1
+                CellSlots = 1
             };
 
             data.Armours[id] = new Armour
             {
                 Id = id++,
                 Name = record.Name,
-                Type = ArmourType.Legs,
+                Type = ArmourType.legs,
                 Stats = new List<Stat>()
                 {
                     new Stat()
@@ -137,20 +137,8 @@ public class GenerateData
                         }
                     }
                 },
-                Cell_Slots = 2
+                CellSlots = 2
             };
         }
-    }
-
-    private static void WriteData(Data data)
-    {
-        string json = JsonSerializer.Serialize(data);
-        string filepath = "data.json";
-
-#if DEBUG
-        filepath = "../../../../Dauntless-Finder-v2/data.json";
-#endif
-
-        File.WriteAllText(filepath, json);
     }
 }

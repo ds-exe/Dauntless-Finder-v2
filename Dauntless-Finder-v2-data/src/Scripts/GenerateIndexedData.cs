@@ -1,6 +1,6 @@
 ﻿using Dauntless_Finder_v2.Shared.src.Enums;
 using Dauntless_Finder_v2.Shared.src.Models;
-using System.Text.Json;
+using Dauntless_Finder_v2.Shared.src.Scripts;
 
 namespace Dauntless_Finder_v2.DataHandler.src.Scripts;
 
@@ -8,14 +8,14 @@ public class GenerateIndexedData
 {
     public static void GenerateArmourData()
     {
-        Data? data = ReadData();
+        Data? data = FileHandler.ReadData<Data>("data.json");
         if (data == null)
         {
             return;
         }
 
         ArmourData armourData = AddArmour(data);
-        WriteArmourData(armourData);
+        FileHandler.WriteData(armourData, "armour-data.json");
     }
 
     private static ArmourData AddArmour(Data data)
@@ -41,7 +41,7 @@ public class GenerateIndexedData
 
         switch (armour.Type)
         {
-            case ArmourType.Head:
+            case ArmourType.head:
                 InitialiseDictionary(armourData.Helms, perks[0].Key, perks[1].Key, perks[2].Key);
                 armourData.Helms[perks[0].Key][perks[1].Key][perks[2].Key].Add(basicArmour);
                 InitialiseDictionary(armourData.Helms, perks[1].Key, perks[2].Key, perks[0].Key);
@@ -49,13 +49,13 @@ public class GenerateIndexedData
                 InitialiseDictionary(armourData.Helms, perks[2].Key, perks[0].Key, perks[1].Key);
                 armourData.Helms[perks[2].Key][perks[0].Key][perks[1].Key].Add(basicArmour);
                 break;
-            case ArmourType.Torso:
+            case ArmourType.torso:
                 InitialiseDictionary(armourData.Torsos, perks[0].Key, perks[1].Key);
                 armourData.Torsos[perks[0].Key][perks[1].Key].Add(basicArmour);
                 InitialiseDictionary(armourData.Torsos, perks[1].Key, perks[0].Key);
                 armourData.Torsos[perks[1].Key][perks[0].Key].Add(basicArmour);
                 break;
-            case ArmourType.Arms:
+            case ArmourType.arms:
                 InitialiseDictionary(armourData.Arms, perks[0].Key, perks[1].Key, perks[2].Key);
                 armourData.Arms[perks[0].Key][perks[1].Key][perks[2].Key].Add(basicArmour);
                 InitialiseDictionary(armourData.Arms, perks[1].Key, perks[2].Key, perks[0].Key);
@@ -63,7 +63,7 @@ public class GenerateIndexedData
                 InitialiseDictionary(armourData.Arms, perks[2].Key, perks[0].Key, perks[1].Key);
                 armourData.Arms[perks[2].Key][perks[0].Key][perks[1].Key].Add(basicArmour);
                 break;
-            case ArmourType.Legs:
+            case ArmourType.legs:
                 InitialiseDictionary(armourData.Legs, perks[0].Key, perks[1].Key);
                 armourData.Legs[perks[0].Key][perks[1].Key].Add(basicArmour);
                 InitialiseDictionary(armourData.Legs, perks[1].Key, perks[0].Key);
@@ -98,29 +98,5 @@ public class GenerateIndexedData
         {
             dict.Add(key, new List<BasicArmour>());
         }
-    }
-
-    public static Data? ReadData()
-    {
-        string filepath = "data.json";
-        #if DEBUG
-        filepath = "../../../../Dauntless-Finder-v2/data.json";
-        #endif
-
-        string txt = File.ReadAllText(filepath);
-        Data? result = JsonSerializer.Deserialize<Data>(txt);
-        return result;
-    }
-
-    private static void WriteArmourData(ArmourData armourData)
-    {
-        string json = JsonSerializer.Serialize(armourData);
-        string filepath = "armour-data.json";
-
-        #if DEBUG
-        filepath = "../../../../Dauntless-Finder-v2/armour-data.json";
-        #endif
-
-        File.WriteAllText(filepath, json);
     }
 }

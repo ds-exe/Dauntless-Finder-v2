@@ -12,5 +12,5 @@ public class Armour
 
     public List<Stat> Stats { get; set; }
 
-    public int Cell_Slots { get; set; }
+    public int CellSlots { get; set; }
 }
