@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dauntless-Finder-v2-data\Dauntless_Finder_v2.DataHandler.csproj" />
+    <ProjectReference Include="..\Dauntless-Finder-v2.Data\Dauntless_Finder_v2.DataHandler.csproj" />
   </ItemGroup>
 
 </Project>

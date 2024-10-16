@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Dauntless_Finder_v2.Shared.csproj" />
+    <ProjectReference Include="..\Dauntless-Finder-v2.Shared\Dauntless_Finder_v2.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,14 +8,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless_Finder_v2.App", "
 		{554947AF-FA79-4BDC-ADB7-C65A4C7A46D1} = {554947AF-FA79-4BDC-ADB7-C65A4C7A46D1}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless_Finder_v2.DataHandler", "Dauntless-Finder-v2-data\Dauntless_Finder_v2.DataHandler.csproj", "{CAF15D55-EA5D-4D2D-BF57-42969594F672}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless_Finder_v2.DataHandler", "Dauntless-Finder-v2.Data\Dauntless_Finder_v2.DataHandler.csproj", "{CAF15D55-EA5D-4D2D-BF57-42969594F672}"
 	ProjectSection(ProjectDependencies) = postProject
 		{554947AF-FA79-4BDC-ADB7-C65A4C7A46D1} = {554947AF-FA79-4BDC-ADB7-C65A4C7A46D1}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless_Finder_v2.Shared", "Shared\Dauntless_Finder_v2.Shared.csproj", "{554947AF-FA79-4BDC-ADB7-C65A4C7A46D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless_Finder_v2.Shared", "Dauntless-Finder-v2.Shared\Dauntless_Finder_v2.Shared.csproj", "{554947AF-FA79-4BDC-ADB7-C65A4C7A46D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dauntless-Finder-v2.Test", "Dauntless-Finder-v2.Test\Dauntless-Finder-v2.Test.csproj", "{6B862B2C-91CD-431E-BE1D-2CFD0255DE17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dauntless_Finder_v2.Test", "Dauntless-Finder-v2.Test\Dauntless-Finder-v2.Test.csproj", "{6B862B2C-91CD-431E-BE1D-2CFD0255DE17}"
 	ProjectSection(ProjectDependencies) = postProject
 		{554947AF-FA79-4BDC-ADB7-C65A4C7A46D1} = {554947AF-FA79-4BDC-ADB7-C65A4C7A46D1}
 		{C1F34B18-D5A0-4D3E-B512-F1ACD2C85907} = {C1F34B18-D5A0-4D3E-B512-F1ACD2C85907}
