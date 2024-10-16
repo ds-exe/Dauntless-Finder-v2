@@ -14,18 +14,5 @@ public class Program
             return;
         }
         Data? data = FileHandler.ReadData<Data>("data.json");
-
-        // Run test for now, eventually replace with proper testing / benchmarks
-        Test(armourData);
-    }
-
-    private static void Test(ArmourData data)
-    {
-        var watch = System.Diagnostics.Stopwatch.StartNew();
-
-        // Do Perk Checker
-
-        watch.Stop();
-        Console.WriteLine($"Time to Check: {watch.ElapsedMilliseconds}");
     }
 }

@@ -6,16 +6,22 @@ namespace Dauntless_Finder_v2.DataHandler.src.Scripts;
 
 public class GenerateIndexedData
 {
-    public static void GenerateArmourData()
+    public static void GenerateJsonData()
+    {
+        ArmourData? armourData = GenerateArmourData();
+        FileHandler.WriteData(armourData, "armour-data.json");
+    }
+
+    public static ArmourData? GenerateArmourData()
     {
         Data? data = FileHandler.ReadData<Data>("data.json");
         if (data == null)
         {
-            return;
+            return null;
         }
 
         ArmourData armourData = AddArmour(data);
-        FileHandler.WriteData(armourData, "armour-data.json");
+        return armourData;
     }
 
     private static ArmourData AddArmour(Data data)

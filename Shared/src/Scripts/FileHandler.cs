@@ -11,14 +11,7 @@ public class FileHandler
         path = $"../../../../Dauntless-Finder-v2/{path}";
         #endif
 
-        var serializeOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-            Converters =
-            {
-                new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower)
-            }
-        };
+        var serializeOptions = GetJsonSerializerOptions();
         string txt = File.ReadAllText(path);
         T? result = JsonSerializer.Deserialize<T>(txt, serializeOptions);
         return result;
@@ -26,14 +19,7 @@ public class FileHandler
 
     public static void WriteData<T>(T data, string path)
     {
-        var serializeOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
-            Converters =
-            {
-                new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower)
-            }
-        };
+        var serializeOptions = GetJsonSerializerOptions();
         string json = JsonSerializer.Serialize(data, serializeOptions);
 
         #if DEBUG
@@ -41,5 +27,17 @@ public class FileHandler
         #endif
 
         File.WriteAllText(path, json);
+    }
+
+    public static JsonSerializerOptions GetJsonSerializerOptions()
+    {
+        return new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+            Converters =
+            {
+                new JsonStringEnumConverter(JsonNamingPolicy.SnakeCaseLower)
+            }
+        };
     }
 }
