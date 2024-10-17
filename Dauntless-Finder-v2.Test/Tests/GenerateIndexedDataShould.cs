@@ -32,7 +32,16 @@ public class GenerateIndexedDataShould
         Assert.That(sut.Helms[6].ContainsKey(34), Is.True);
         Assert.That(sut.Helms[6][34].ContainsKey(72), Is.True);
         Assert.That(sut.Helms[6][34][72].FirstOrDefault(), Is.Not.Null);
+        Assert.That(sut.Helms[6][34][72].FirstOrDefault().Id, Is.EqualTo(1));
         Assert.That(sut.Helms[6][34][72].FirstOrDefault().Perks.ContainsKey(6), Is.True);
         Assert.That(sut.Helms[6][34][72].FirstOrDefault().Perks[6], Is.EqualTo(2));
+
+        Assert.That(sut.Helms.ContainsKey(31), Is.True);
+        Assert.That(sut.Helms[31].ContainsKey(54), Is.True);
+        Assert.That(sut.Helms[31][54].ContainsKey(76), Is.True);
+        Assert.That(sut.Helms[31][54][76].FirstOrDefault(), Is.Not.Null);
+        Assert.That(sut.Helms[31][54][76].FirstOrDefault().Id, Is.EqualTo(5));
+        Assert.That(sut.Helms[31][54][76].FirstOrDefault().Perks.ContainsKey(31), Is.True);
+        Assert.That(sut.Helms[31][54][76].FirstOrDefault().Perks[31], Is.EqualTo(3));
     }
 }

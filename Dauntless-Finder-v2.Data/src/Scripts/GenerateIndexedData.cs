@@ -38,42 +38,44 @@ public class GenerateIndexedData
 
     private static void AddArmour(ArmourData armourData, Armour armour)
     {
-        var perks = armour.Stats[armour.Stats.Count-1].Perks.ToList();
         var basicArmour = new BasicArmour()
         {
             Id = armour.Id,
             Perks = armour.Stats[armour.Stats.Count - 1].Perks
         };
 
+        var perks = basicArmour.Perks.Select(rec => rec.Key).ToList();
+        perks.Sort();
+
         switch (armour.Type)
         {
             case ArmourType.HEAD:
-                InitialiseDictionary(armourData.Helms, perks[0].Key, perks[1].Key, perks[2].Key);
-                armourData.Helms[perks[0].Key][perks[1].Key][perks[2].Key].Add(basicArmour);
-                InitialiseDictionary(armourData.Helms, perks[1].Key, perks[2].Key, perks[0].Key);
-                armourData.Helms[perks[1].Key][perks[2].Key][perks[0].Key].Add(basicArmour);
-                InitialiseDictionary(armourData.Helms, perks[2].Key, perks[0].Key, perks[1].Key);
-                armourData.Helms[perks[2].Key][perks[0].Key][perks[1].Key].Add(basicArmour);
+                InitialiseDictionary(armourData.Helms, perks[0], perks[1], perks[2]);
+                armourData.Helms[perks[0]][perks[1]][perks[2]].Add(basicArmour);
+                InitialiseDictionary(armourData.Helms, perks[1], perks[2], perks[0]);
+                armourData.Helms[perks[1]][perks[2]][perks[0]].Add(basicArmour);
+                InitialiseDictionary(armourData.Helms, perks[2], perks[0], perks[1]);
+                armourData.Helms[perks[2]][perks[0]][perks[1]].Add(basicArmour);
                 break;
             case ArmourType.TORSO:
-                InitialiseDictionary(armourData.Torsos, perks[0].Key, perks[1].Key);
-                armourData.Torsos[perks[0].Key][perks[1].Key].Add(basicArmour);
-                InitialiseDictionary(armourData.Torsos, perks[1].Key, perks[0].Key);
-                armourData.Torsos[perks[1].Key][perks[0].Key].Add(basicArmour);
+                InitialiseDictionary(armourData.Torsos, perks[0], perks[1]);
+                armourData.Torsos[perks[0]][perks[1]].Add(basicArmour);
+                InitialiseDictionary(armourData.Torsos, perks[1], perks[0]);
+                armourData.Torsos[perks[1]][perks[0]].Add(basicArmour);
                 break;
             case ArmourType.ARMS:
-                InitialiseDictionary(armourData.Arms, perks[0].Key, perks[1].Key, perks[2].Key);
-                armourData.Arms[perks[0].Key][perks[1].Key][perks[2].Key].Add(basicArmour);
-                InitialiseDictionary(armourData.Arms, perks[1].Key, perks[2].Key, perks[0].Key);
-                armourData.Arms[perks[1].Key][perks[2].Key][perks[0].Key].Add(basicArmour);
-                InitialiseDictionary(armourData.Arms, perks[2].Key, perks[0].Key, perks[1].Key);
-                armourData.Arms[perks[2].Key][perks[0].Key][perks[1].Key].Add(basicArmour);
+                InitialiseDictionary(armourData.Arms, perks[0], perks[1], perks[2]);
+                armourData.Arms[perks[0]][perks[1]][perks[2]].Add(basicArmour);
+                InitialiseDictionary(armourData.Arms, perks[1], perks[2], perks[0]);
+                armourData.Arms[perks[1]][perks[2]][perks[0]].Add(basicArmour);
+                InitialiseDictionary(armourData.Arms, perks[2], perks[0], perks[1]);
+                armourData.Arms[perks[2]][perks[0]][perks[1]].Add(basicArmour);
                 break;
             case ArmourType.LEGS:
-                InitialiseDictionary(armourData.Legs, perks[0].Key, perks[1].Key);
-                armourData.Legs[perks[0].Key][perks[1].Key].Add(basicArmour);
-                InitialiseDictionary(armourData.Legs, perks[1].Key, perks[0].Key);
-                armourData.Legs[perks[1].Key][perks[0].Key].Add(basicArmour);
+                InitialiseDictionary(armourData.Legs, perks[0], perks[1]);
+                armourData.Legs[perks[0]][perks[1]].Add(basicArmour);
+                InitialiseDictionary(armourData.Legs, perks[1], perks[0]);
+                armourData.Legs[perks[1]][perks[0]].Add(basicArmour);
                 break;
         }
     }
