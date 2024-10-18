@@ -6,6 +6,7 @@ using System.Globalization;
 
 namespace Dauntless_Finder_v2.DataHandler.src.Scripts;
 
+[Obsolete("Data now fetched from API by FetchData", true)]
 public class GenerateData
 {
     public static void GenerateJsonData()
