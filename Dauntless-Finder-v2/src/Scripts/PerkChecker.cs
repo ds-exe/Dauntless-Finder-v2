@@ -1,4 +1,5 @@
-﻿using Dauntless_Finder_v2.Shared.src.Models;
+﻿using Dauntless_Finder_v2.Shared.src.Enums;
+using Dauntless_Finder_v2.Shared.src.Models;
 using Dauntless_Finder_v2.Shared.src.Scripts;
 
 namespace Dauntless_Finder_v2.App.src.Scripts;
@@ -8,6 +9,8 @@ public class PerkChecker
     protected ArmourData armourData { get; set; }
 
     protected Data data { get; set; }
+
+    protected static readonly int maxEmptyCellSlots = 6;
 
     public PerkChecker()
     {
@@ -53,27 +56,35 @@ public class PerkChecker
     {
         Dictionary<int, int> currentPerkValues = GetCurrentPerkValues(requiredPerks);
 
-        return FindArmourPiece(0, 0, requiredPerks, currentPerkValues, 0);
+        var armourType = Enum.GetValues(typeof(ArmourType)).Cast<ArmourType>().Min();
+        return FindArmourPiece(0, armourType, requiredPerks, currentPerkValues);
     }
 
-    protected (bool, int) FindArmourPiece(int perkIndex, int armourIndex, List<int> requiredPerks, Dictionary<int, int> currentPerkValues, int emptyCellSlots)
+    protected (bool, int) FindArmourPiece(int perkIndex, ArmourType armourType, List<int> requiredPerks, Dictionary<int, int> currentPerkValues)
     {
+        var isDefined = Enum.IsDefined(typeof(ArmourType), armourType);
+        int totalPerkThreshold = 0;
         var buildComplete = true;
         foreach (var requiredPerk in requiredPerks)
         {
-            if (currentPerkValues[requiredPerk] >= 0)
+            if (currentPerkValues[requiredPerk] > 0)
             {
-                buildComplete = false;
-                break;
+                if (isDefined)
+                {
+                    buildComplete = false;
+                    break;
+                }
+                totalPerkThreshold += currentPerkValues[requiredPerk];
             }
         }
         if (buildComplete)
         {
-            return (true, 0); // TODO: Replace 0 with number of empty cell slots
+            return (true, maxEmptyCellSlots);
         }
-        if (armourIndex >= 4)
+        if (!isDefined)
         {
-            return (buildComplete, buildComplete ? 0 : 0); // TODO: Replace 1st 0 with number of empty cell slots
+            var emptyCellSlots = maxEmptyCellSlots - totalPerkThreshold;
+            return (emptyCellSlots < 0, emptyCellSlots);
         }
 
         // Recursive method for each ArmourType index 0, 1, 2, 3
@@ -81,11 +92,11 @@ public class PerkChecker
         return (false, 0);
     }
 
-    protected Dictionary<int, int> GetCurrentPerkValues(List<int> requiredPerks)
+    protected Dictionary<int, int> GetCurrentPerkValues(List<int> perkList)
     {
         Dictionary<int, int> currentPerkValues = [];
 
-        foreach (var perk in requiredPerks)
+        foreach (var perk in perkList)
         {
             currentPerkValues[perk] = data.Perks[perk].Threshold;
         }
@@ -98,10 +109,15 @@ public class PerkChecker
         availablePerks.Add(requestedPerk);
         if (emptyCellSlots > 0)
         {
-            // TODO: Logic to check all requested perks for if any have threshold less than empty slots
-
-            //availablePerks.Add(requestedPerk);
-            //requestedPerks.Remove(requestedPerk); // Remove as found
+            var perkThresholds = GetCurrentPerkValues(requestedPerks);
+            foreach (var perk in perkThresholds)
+            {
+                if (perk.Value < emptyCellSlots)
+                {
+                    availablePerks.Add(perk.Key);
+                    requestedPerks.Remove(perk.Key);
+                }
+            }
         }
     }
 }
