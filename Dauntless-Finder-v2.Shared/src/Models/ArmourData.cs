@@ -2,7 +2,7 @@
 
 public class ArmourData
 {
-    public Dictionary<int, Dictionary<int, Dictionary<int, List<BasicArmour>>>> Helms { get; set; } = [];
+    public Dictionary<int, Dictionary<int, Dictionary<int, List<BasicArmour>>>> Heads { get; set; } = [];
 
     public Dictionary<int, Dictionary<int, List<BasicArmour>>> Torsos { get; set; } = [];
 

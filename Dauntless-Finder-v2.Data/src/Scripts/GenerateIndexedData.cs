@@ -50,12 +50,12 @@ public class GenerateIndexedData
         switch (armour.Type)
         {
             case ArmourType.HEAD:
-                InitialiseDictionary(armourData.Helms, perks[0], perks[1], perks[2]);
-                armourData.Helms[perks[0]][perks[1]][perks[2]].Add(basicArmour);
-                InitialiseDictionary(armourData.Helms, perks[1], perks[2], perks[0]);
-                armourData.Helms[perks[1]][perks[2]][perks[0]].Add(basicArmour);
-                InitialiseDictionary(armourData.Helms, perks[2], perks[0], perks[1]);
-                armourData.Helms[perks[2]][perks[0]][perks[1]].Add(basicArmour);
+                InitialiseDictionary(armourData.Heads, perks[0], perks[1], perks[2]);
+                armourData.Heads[perks[0]][perks[1]][perks[2]].Add(basicArmour);
+                InitialiseDictionary(armourData.Heads, perks[1], perks[2], perks[0]);
+                armourData.Heads[perks[1]][perks[2]][perks[0]].Add(basicArmour);
+                InitialiseDictionary(armourData.Heads, perks[2], perks[0], perks[1]);
+                armourData.Heads[perks[2]][perks[0]][perks[1]].Add(basicArmour);
                 break;
             case ArmourType.TORSO:
                 InitialiseDictionary(armourData.Torsos, perks[0], perks[1]);
