@@ -22,6 +22,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dauntless-Finder-v2.Data\Dauntless_Finder_v2.DataHandler.csproj" />
+    <ProjectReference Include="..\Dauntless-Finder-v2\Dauntless_Finder_v2.App.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="armour-data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

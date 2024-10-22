@@ -32,20 +32,20 @@ public class PerkChecker
         requestedPerks.Sort();
         List<int> availablePerks = [];
 
-        int? requestedPerk = requestedPerks.First();
-        while (requestedPerk != null)
+        int requestedPerk = requestedPerks.FirstOrDefault();
+        while (requestedPerk != 0)
         {
-            requiredPerks.Add((int)requestedPerk); // Add requirement for build
+            requiredPerks.Add(requestedPerk); // Add requirement for build
             requiredPerks.Sort();
 
             var (foundBuild, emptyCellSlots) = GetAvailablePerksInternal(requiredPerks);
             if (foundBuild)
             {
-                BuildFound((int)requestedPerk, availablePerks, emptyCellSlots, requestedPerks);
+                BuildFound(requestedPerk, availablePerks, emptyCellSlots, requestedPerks);
             }
 
-            requiredPerks.Remove((int)requestedPerk); // Remove requirement for build
-            requestedPerks.Remove((int)requestedPerk); // Remove as checked
+            requiredPerks.Remove(requestedPerk); // Remove requirement for build
+            requestedPerks.Remove(requestedPerk); // Remove as checked
             requestedPerk = requestedPerks.FirstOrDefault();
         }
 
@@ -111,14 +111,14 @@ public class PerkChecker
                 bool perkFound = false;
                 for (int j = i + 1; j < requiredPerks.Count; j++)
                 {
-                    if (currentPerkValues[requiredPerks[j]] > 0 && currentData[i].ContainsKey(requiredPerks[j]))
+                    if (currentPerkValues[requiredPerks[j]] > 0 && currentData[requiredPerks[i]].ContainsKey(requiredPerks[j]))
                     {
                         perkFound = true;
                         Dictionary<int, int>? perks = currentData[requiredPerks[i]][requiredPerks[j]].FirstOrDefault()?.Perks;
                         if (perks != null)
                         {
                             ReduceCurrentPerkValues(perks, currentPerkValues);
-                            var (found, cellSlots) = FindArmourPiece2Perk(armourType++, requiredPerks, currentPerkValues); // Recurse
+                            var (found, cellSlots) = FindArmourPiece(armourType++, requiredPerks, currentPerkValues); // Recurse
                             if (found)
                             {
                                 return (found, cellSlots);
@@ -135,13 +135,13 @@ public class PerkChecker
 
         for (int i = 0; i < requiredPerksRepeatCheck.Count; i++)
         {
-            if (currentPerkValues[requiredPerksRepeatCheck[i]] > 0 && currentData[i].ContainsKey(requiredPerksRepeatCheck[i]))
+            if (currentPerkValues[requiredPerksRepeatCheck[i]] > 0 && currentData[requiredPerks[i]].ContainsKey(requiredPerksRepeatCheck[i]))
             {
                 Dictionary<int, int>? perks = currentData[requiredPerksRepeatCheck[i]].FirstOrDefault().Value.FirstOrDefault()?.Perks;
                 if (perks != null)
                 {
                     ReduceCurrentPerkValues(perks, currentPerkValues);
-                    var (found, cellSlots) = FindArmourPiece2Perk(armourType++, requiredPerks, currentPerkValues); // Recurse
+                    var (found, cellSlots) = FindArmourPiece(armourType++, requiredPerks, currentPerkValues); // Recurse
                     if (found)
                     {
                         return (found, cellSlots);
@@ -162,21 +162,21 @@ public class PerkChecker
         {
             if (currentPerkValues[requiredPerks[i]] > 0 && currentData.ContainsKey(requiredPerks[i]))
             {
+                bool perkFound = false;
                 for (int j = i + 1; j < requiredPerks.Count; j++)
                 {
-                    if (currentPerkValues[requiredPerks[j]] > 0 && currentData[i].ContainsKey(requiredPerks[j]))
+                    if (currentPerkValues[requiredPerks[j]] > 0 && currentData[requiredPerks[i]].ContainsKey(requiredPerks[j]))
                     {
-                        bool perkFound = false;
                         for (int k = j + 1; k < requiredPerks.Count; k++)
                         {
-                            if (currentPerkValues[requiredPerks[k]] > 0 && currentData[i][j].ContainsKey(requiredPerks[k]))
+                            if (currentPerkValues[requiredPerks[k]] > 0 && currentData[requiredPerks[i]][requiredPerks[j]].ContainsKey(requiredPerks[k]))
                             {
                                 perkFound = true;
                                 Dictionary<int, int>? perks = currentData[requiredPerks[i]][requiredPerks[j]][requiredPerks[k]].FirstOrDefault()?.Perks;
                                 if (perks != null)
                                 {
                                     ReduceCurrentPerkValues(perks, currentPerkValues);
-                                    var (found, cellSlots) = FindArmourPiece3Perk(armourType++, requiredPerks, currentPerkValues); // Recurse
+                                    var (found, cellSlots) = FindArmourPiece(armourType++, requiredPerks, currentPerkValues); // Recurse
                                     if (found)
                                     {
                                         return (found, cellSlots);
@@ -185,11 +185,11 @@ public class PerkChecker
                                 }
                             }
                         }
-                        if (!perkFound)
-                        {
-                            requiredPerksRepeatCheck.Add(requiredPerks[i]);
-                        }
                     }
+                }
+                if (!perkFound)
+                {
+                    requiredPerksRepeatCheck.Add(requiredPerks[i]);
                 }
             }
         }
@@ -202,14 +202,14 @@ public class PerkChecker
                 bool perkFound = false;
                 for (int j = 0; j < requiredPerks.Count; j++)
                 {
-                    if (currentPerkValues[requiredPerks[j]] > 0 && currentData[i].ContainsKey(requiredPerks[j]))
+                    if (currentPerkValues[requiredPerks[j]] > 0 && currentData[requiredPerksRepeatCheck[i]].ContainsKey(requiredPerks[j]))
                     {
                         perkFound = true;
                         Dictionary<int, int>? perks = currentData[requiredPerksRepeatCheck[i]][requiredPerks[j]].FirstOrDefault().Value.FirstOrDefault()?.Perks;
                         if (perks != null)
                         {
                             ReduceCurrentPerkValues(perks, currentPerkValues);
-                            var (found, cellSlots) = FindArmourPiece2Perk(armourType++, requiredPerks, currentPerkValues); // Recurse
+                            var (found, cellSlots) = FindArmourPiece(armourType++, requiredPerks, currentPerkValues); // Recurse
                             if (found)
                             {
                                 return (found, cellSlots);
@@ -233,7 +233,7 @@ public class PerkChecker
                 if (perks != null)
                 {
                     ReduceCurrentPerkValues(perks, currentPerkValues);
-                    var (found, cellSlots) = FindArmourPiece2Perk(armourType++, requiredPerks, currentPerkValues); // Recurse
+                    var (found, cellSlots) = FindArmourPiece(armourType++, requiredPerks, currentPerkValues); // Recurse
                     if (found)
                     {
                         return (found, cellSlots);
@@ -250,7 +250,10 @@ public class PerkChecker
     {
         foreach (var perk in perks)
         {
-            currentPerkValues[perk.Key] -= perk.Value;
+            if (currentPerkValues.ContainsKey(perk.Key))
+            {
+                currentPerkValues[perk.Key] -= perk.Value;
+            }
         }
     }
 
@@ -258,7 +261,10 @@ public class PerkChecker
     {
         foreach (var perk in perks)
         {
-            currentPerkValues[perk.Key] += perk.Value;
+            if (currentPerkValues.ContainsKey(perk.Key))
+            {
+                currentPerkValues[perk.Key] += perk.Value;
+            }
         }
     }
 
