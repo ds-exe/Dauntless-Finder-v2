@@ -87,4 +87,17 @@ public class PerkCheckerBenchmarks
 
         var sut = perkChecker.GetAvailablePerks([32, 57], requestedPerks.ToList());
     }
+
+    [Benchmark]
+    public void RequireLargeQuantityValid()
+    {
+        List<int> requiredPerks = [5, 8, 17, 24, 30];
+        List<int> requestedPerks = [];
+        for (int i = 1; i <= 80; i++)
+        {
+            requestedPerks.Add(i);
+        }
+        requestedPerks = requestedPerks.Except(requiredPerks).ToList();
+        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+    }
 }
