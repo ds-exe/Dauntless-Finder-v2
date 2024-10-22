@@ -135,7 +135,7 @@ public class PerkChecker
 
         for (int i = 0; i < requiredPerksRepeatCheck.Count; i++)
         {
-            if (currentPerkValues[requiredPerksRepeatCheck[i]] > 0 && currentData[requiredPerks[i]].ContainsKey(requiredPerksRepeatCheck[i]))
+            if (currentPerkValues[requiredPerksRepeatCheck[i]] > 0 && currentData.ContainsKey(requiredPerksRepeatCheck[i]))
             {
                 Dictionary<int, int>? perks = currentData[requiredPerksRepeatCheck[i]].FirstOrDefault().Value.FirstOrDefault()?.Perks;
                 if (perks != null)
