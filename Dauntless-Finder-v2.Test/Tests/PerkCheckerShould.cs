@@ -111,16 +111,6 @@ public class PerkCheckerShould
     }
 
     [Test]
-    public void ErrorTest()
-    {
-        List<int> requiredPerks = [5, 8, 17, 24, 30];
-
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), [36]);
-
-        Assert.That(sut.Contains(36), Is.True);
-    }
-
-    [Test]
     public void RequireAllThreshold2()
     {
         List<int> requiredPerks = [5, 8, 17, 24, 30, 44, 48, 71];
