@@ -77,14 +77,14 @@ public class PerkChecker
                 totalPerkThreshold += currentPerkValues[requiredPerk];
             }
         }
-        if (buildComplete)
+        if (buildComplete && isDefined)
         {
             return (true, maxEmptyCellSlots);
         }
         if (!isDefined)
         {
             var emptyCellSlots = maxEmptyCellSlots - totalPerkThreshold;
-            return (emptyCellSlots < 0, emptyCellSlots);
+            return (emptyCellSlots >= 0, emptyCellSlots);
         }
 
         switch (armourType)
@@ -118,12 +118,14 @@ public class PerkChecker
                         if (perks != null)
                         {
                             ReduceCurrentPerkValues(perks, currentPerkValues);
-                            var (found, cellSlots) = FindArmourPiece(armourType++, requiredPerks, currentPerkValues); // Recurse
+                            var (found, cellSlots) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
                             if (found)
                             {
+                                //Console.WriteLine(currentData[requiredPerks[i]][requiredPerks[j]].FirstOrDefault().Id);
                                 return (found, cellSlots);
                             }
-                            IncreaseCurrentPerkValues(perks, currentPerkValues); }
+                            IncreaseCurrentPerkValues(perks, currentPerkValues);
+                        }
                     }
                 }
                 if (!perkFound)
@@ -141,14 +143,23 @@ public class PerkChecker
                 if (perks != null)
                 {
                     ReduceCurrentPerkValues(perks, currentPerkValues);
-                    var (found, cellSlots) = FindArmourPiece(armourType++, requiredPerks, currentPerkValues); // Recurse
+                    var (found, cellSlots) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
                     if (found)
                     {
+                        //Console.WriteLine(currentData[requiredPerksRepeatCheck[i]].FirstOrDefault().Value.FirstOrDefault().Id);
                         return (found, cellSlots);
                     }
                     IncreaseCurrentPerkValues(perks, currentPerkValues);
                 }
             }
+        }
+
+
+        var (foundGeneric, cellSlotsGeneric) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
+        if (foundGeneric)
+        {
+            //Console.WriteLine($"Generic {armourType}");
+            return (foundGeneric, cellSlotsGeneric);
         }
 
         return (false, 0);
@@ -176,9 +187,10 @@ public class PerkChecker
                                 if (perks != null)
                                 {
                                     ReduceCurrentPerkValues(perks, currentPerkValues);
-                                    var (found, cellSlots) = FindArmourPiece(armourType++, requiredPerks, currentPerkValues); // Recurse
+                                    var (found, cellSlots) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
                                     if (found)
                                     {
+                                        //Console.WriteLine(currentData[requiredPerks[i]][requiredPerks[j]][requiredPerks[k]].FirstOrDefault().Id);
                                         return (found, cellSlots);
                                     }
                                     IncreaseCurrentPerkValues(perks, currentPerkValues);
@@ -209,9 +221,10 @@ public class PerkChecker
                         if (perks != null)
                         {
                             ReduceCurrentPerkValues(perks, currentPerkValues);
-                            var (found, cellSlots) = FindArmourPiece(armourType++, requiredPerks, currentPerkValues); // Recurse
+                            var (found, cellSlots) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
                             if (found)
                             {
+                                //Console.WriteLine(currentData[requiredPerksRepeatCheck[i]][requiredPerks[j]].FirstOrDefault().Value.FirstOrDefault().Id);
                                 return (found, cellSlots);
                             }
                             IncreaseCurrentPerkValues(perks, currentPerkValues);
@@ -233,14 +246,22 @@ public class PerkChecker
                 if (perks != null)
                 {
                     ReduceCurrentPerkValues(perks, currentPerkValues);
-                    var (found, cellSlots) = FindArmourPiece(armourType++, requiredPerks, currentPerkValues); // Recurse
+                    var (found, cellSlots) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
                     if (found)
                     {
+                        //Console.WriteLine(currentData[requiredPerksRepeatCheck2[i]].FirstOrDefault().Value.FirstOrDefault().Value.FirstOrDefault().Id);
                         return (found, cellSlots);
                     }
                     IncreaseCurrentPerkValues(perks, currentPerkValues);
                 }
             }
+        }
+
+        var (foundGeneric, cellSlotsGeneric) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
+        if (foundGeneric)
+        {
+            //Console.WriteLine($"Generic {armourType}");
+            return (foundGeneric, cellSlotsGeneric);
         }
 
         return (false, 0);
@@ -288,7 +309,7 @@ public class PerkChecker
             var perkThresholds = GetCurrentPerkValues(requestedPerks);
             foreach (var perk in perkThresholds)
             {
-                if (perk.Value < emptyCellSlots)
+                if (perk.Value <= emptyCellSlots)
                 {
                     availablePerks.Add(perk.Key);
                     requestedPerks.Remove(perk.Key);

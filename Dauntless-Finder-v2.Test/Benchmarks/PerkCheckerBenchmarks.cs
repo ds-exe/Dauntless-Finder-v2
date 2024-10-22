@@ -1,6 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
 using Dauntless_Finder_v2.App.src.Scripts;
-using NUnit.Framework;
 
 namespace Dauntless_Finder_v2.Test.Benchmarks;
 

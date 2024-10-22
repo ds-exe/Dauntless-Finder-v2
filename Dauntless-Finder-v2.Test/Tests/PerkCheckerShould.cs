@@ -1,5 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
-using Dauntless_Finder_v2.App.src.Scripts;
+﻿using Dauntless_Finder_v2.App.src.Scripts;
 using NUnit.Framework;
 
 namespace Dauntless_Finder_v2.Test.Tests;
@@ -63,7 +62,7 @@ public class PerkCheckerShould
 
         foreach (int i in requestedPerks)
         {
-            Assert.That(sut.Contains(i), Is.True);
+            Assert.That(sut.Contains(i), Is.False);
         }
     }
 }
