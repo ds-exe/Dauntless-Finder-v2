@@ -84,6 +84,43 @@ public class PerkCheckerShould
     }
 
     [Test]
+    public void RequireLargeQuantityValid()
+    {
+        List<int> requiredPerks = [5, 8, 17, 24, 30];
+        List<int> requestedPerks = [];
+        for (int i = 1; i <= 80; i++)
+        {
+            requestedPerks.Add(i);
+        }
+        requestedPerks = requestedPerks.Except(requiredPerks).ToList();
+        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+
+        List<int> trueList = [4,6,9,10,11,12,18,19,20,21,23,26,27,29,31,32,33,34,35,36,37,38,39,44,45,46,47,48,51,52,54,55,56,57,58,60,63,64,65,66,67,69,70,71,73,74,77];
+
+        foreach (int i in requestedPerks)
+        {
+            if (trueList.Contains(i))
+            {
+                Assert.That(sut.Contains(i), Is.True);
+            }
+            else
+            {
+                Assert.That(sut.Contains(i), Is.False);
+            }
+        }
+    }
+
+    [Test]
+    public void ErrorTest()
+    {
+        List<int> requiredPerks = [5, 8, 17, 24, 30];
+
+        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), [36]);
+
+        Assert.That(sut.Contains(36), Is.True);
+    }
+
+    [Test]
     public void RequireAllThreshold2()
     {
         List<int> requiredPerks = [5, 8, 17, 24, 30, 44, 48, 71];

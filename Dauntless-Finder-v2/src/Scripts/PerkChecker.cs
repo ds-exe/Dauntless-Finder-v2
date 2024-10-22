@@ -139,21 +139,20 @@ public class PerkChecker
         {
             if (currentPerkValues[requiredPerksRepeatCheck[i]] > 0 && currentData.ContainsKey(requiredPerksRepeatCheck[i]))
             {
-                Dictionary<int, int>? perks = currentData[requiredPerksRepeatCheck[i]].FirstOrDefault().Value.FirstOrDefault()?.Perks;
+                Dictionary<int, int>? perks = currentData[requiredPerksRepeatCheck[i]][0].FirstOrDefault()?.Perks;
                 if (perks != null)
                 {
                     ReduceCurrentPerkValues(perks, currentPerkValues);
                     var (found, cellSlots) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
                     if (found)
                     {
-                        //Console.WriteLine(currentData[requiredPerksRepeatCheck[i]].FirstOrDefault().Value.FirstOrDefault().Id);
+                        //Console.WriteLine(currentData[requiredPerksRepeatCheck[i]][0].FirstOrDefault().Id);
                         return (found, cellSlots);
                     }
                     IncreaseCurrentPerkValues(perks, currentPerkValues);
                 }
             }
         }
-
 
         var (foundGeneric, cellSlotsGeneric) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
         if (foundGeneric)
@@ -217,17 +216,20 @@ public class PerkChecker
                     if (currentPerkValues[requiredPerks[j]] > 0 && currentData[requiredPerksRepeatCheck[i]].ContainsKey(requiredPerks[j]))
                     {
                         perkFound = true;
-                        Dictionary<int, int>? perks = currentData[requiredPerksRepeatCheck[i]][requiredPerks[j]].FirstOrDefault().Value.FirstOrDefault()?.Perks;
-                        if (perks != null)
+                        foreach (var armour in currentData[requiredPerksRepeatCheck[i]][requiredPerks[j]][0])
                         {
-                            ReduceCurrentPerkValues(perks, currentPerkValues);
-                            var (found, cellSlots) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
-                            if (found)
+                            Dictionary<int, int>? perks = armour.Perks;
+                            if (perks != null)
                             {
-                                //Console.WriteLine(currentData[requiredPerksRepeatCheck[i]][requiredPerks[j]].FirstOrDefault().Value.FirstOrDefault().Id);
-                                return (found, cellSlots);
+                                ReduceCurrentPerkValues(perks, currentPerkValues);
+                                var (found, cellSlots) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
+                                if (found)
+                                {
+                                    //Console.WriteLine(armour.Id);
+                                    return (found, cellSlots);
+                                }
+                                IncreaseCurrentPerkValues(perks, currentPerkValues);
                             }
-                            IncreaseCurrentPerkValues(perks, currentPerkValues);
                         }
                     }
                 }
@@ -242,14 +244,14 @@ public class PerkChecker
         {
             if (currentPerkValues[requiredPerksRepeatCheck2[i]] > 0 && currentData.ContainsKey(requiredPerksRepeatCheck2[i]))
             {
-                Dictionary<int, int>? perks = currentData[requiredPerksRepeatCheck2[i]].FirstOrDefault().Value.FirstOrDefault().Value.FirstOrDefault()?.Perks;
+                Dictionary<int, int>? perks = currentData[requiredPerksRepeatCheck2[i]][0][0].FirstOrDefault()?.Perks;
                 if (perks != null)
                 {
                     ReduceCurrentPerkValues(perks, currentPerkValues);
                     var (found, cellSlots) = FindArmourPiece(armourType + 1, requiredPerks, currentPerkValues); // Recurse
                     if (found)
                     {
-                        //Console.WriteLine(currentData[requiredPerksRepeatCheck2[i]].FirstOrDefault().Value.FirstOrDefault().Value.FirstOrDefault().Id);
+                        //Console.WriteLine(currentData[requiredPerksRepeatCheck2[i]][0][0].FirstOrDefault().Id);
                         return (found, cellSlots);
                     }
                     IncreaseCurrentPerkValues(perks, currentPerkValues);
