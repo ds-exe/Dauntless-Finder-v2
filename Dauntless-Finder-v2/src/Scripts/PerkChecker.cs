@@ -304,6 +304,7 @@ public class PerkChecker
     protected void BuildFound(int requestedPerk, List<int> availablePerks, int emptyCellSlots, List<int> requestedPerks)
     {
         availablePerks.Add(requestedPerk);
+        requestedPerks.Remove(requestedPerk);
         if (emptyCellSlots > 0)
         {
             var perkThresholds = GetCurrentPerkValues(requestedPerks);
