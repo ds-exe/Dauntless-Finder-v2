@@ -28,6 +28,8 @@ public class PerkChecker
 
     public List<int> GetAvailablePerks(List<int> requiredPerks, List<int> requestedPerks)
     {
+        requiredPerks = requiredPerks.ToList();
+        requestedPerks = requestedPerks.ToList();
         requiredPerks.Sort();
         requestedPerks.Sort();
         List<int> availablePerks = [];

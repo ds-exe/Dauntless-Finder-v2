@@ -35,7 +35,7 @@ public class PerkCheckerShould
     {
         List<int> requiredPerks = [];
         List<int> requestedPerks = new() { 1 };
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         Assert.That(sut.Contains(1), Is.True);
     }
@@ -45,7 +45,7 @@ public class PerkCheckerShould
     {
         List<int> requiredPerks = [];
         List<int> requestedPerks = new() { 1, 6, 3, 5 };
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         foreach (int i in requestedPerks)
         {
@@ -58,7 +58,7 @@ public class PerkCheckerShould
     {
         List<int> requiredPerks = new() { 1, 6, 3, 5 };
         List<int> requestedPerks = new() { 4 };
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         foreach (int i in requestedPerks)
         {
@@ -75,7 +75,7 @@ public class PerkCheckerShould
         {
             requestedPerks.Add(i);
         }
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         foreach (int i in requestedPerks)
         {
@@ -93,7 +93,7 @@ public class PerkCheckerShould
             requestedPerks.Add(i);
         }
         requestedPerks = requestedPerks.Except(requiredPerks).ToList();
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         List<int> trueList = [4,6,9,10,11,12,18,19,20,21,23,26,27,29,31,32,33,34,35,36,37,38,39,44,45,46,47,48,51,52,54,55,56,57,58,60,63,64,65,66,67,69,70,71,73,74,77];
 
@@ -115,7 +115,7 @@ public class PerkCheckerShould
     {
         List<int> requiredPerks = [5, 8, 17, 24, 30, 44, 48, 71];
         List<int> requestedPerks = [77];
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         foreach (int i in requestedPerks)
         {
@@ -128,7 +128,7 @@ public class PerkCheckerShould
     {
         List<int> requiredPerks = [7, 10, 13, 22, 25, 42, 72];
         List<int> requestedPerks = [76];
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         foreach (int i in requestedPerks)
         {
@@ -141,7 +141,7 @@ public class PerkCheckerShould
     {
         List<int> requiredPerks = [4, 6, 11, 12, 18, 19, 21, 27, 33, 36, 49, 51, 53, 54, 56, 58];
         List<int> requestedPerks = [67];
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         foreach (int i in requestedPerks)
         {
@@ -154,7 +154,7 @@ public class PerkCheckerShould
     {
         List<int> requiredPerks = [2, 40, 59, 60, 65];
         List<int> requestedPerks = [79];
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         foreach (int i in requestedPerks)
         {
@@ -167,7 +167,7 @@ public class PerkCheckerShould
     {
         List<int> requiredPerks = [16, 32];
         List<int> requestedPerks = [57];
-        var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         foreach (int i in requestedPerks)
         {
@@ -195,7 +195,7 @@ public class PerkCheckerShould
     public void LimitedBuildTest()
     {
         List<int> requestedPerks = [8, 20, 26, 32, 38, 41, 42, 46, 48, 50, 51, 55, 67];
-        var sut = perkChecker.GetAvailablePerks([32, 57], requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks([32, 57], requestedPerks);
 
         foreach (int i in requestedPerks)
         {
@@ -214,7 +214,7 @@ public class PerkCheckerShould
         List<int> removedPerks = [8, 20, 26, 32, 38, 41, 42, 46, 48, 50, 51, 55, 67, 32, 57];
         requestedPerks = requestedPerks.Except(removedPerks).ToList();
 
-        var sut = perkChecker.GetAvailablePerks([32, 57], requestedPerks.ToList());
+        var sut = perkChecker.GetAvailablePerks([32, 57], requestedPerks);
 
         foreach (int i in requestedPerks)
         {
