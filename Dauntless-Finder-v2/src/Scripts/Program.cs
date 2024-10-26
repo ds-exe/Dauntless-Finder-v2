@@ -44,9 +44,12 @@ public class Program
         //    requiredPerks.Remove(i);
         //}
         requiredPerks.Add(36);
-        var sut = bruteForceChecker.IsBuildViable(requiredPerks);
+        var sut = bruteForceChecker.IsBuildViable([1, 16, 32]);
 
         BuildFinder buildFinder = new BuildFinder();
-        var builds = buildFinder.GetBuilds([5, 8, 17, 24, 30, 36], 50);
+        var builds = buildFinder.GetBuilds([16, 32, 48, 63], 50);
+
+        BruteForceFinder bruteForceFinder = new BruteForceFinder();
+        var allBuilds = bruteForceFinder.GetAllBuilds([16, 32, 48, 63], 50);
     }
 }

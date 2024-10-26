@@ -15,8 +15,18 @@ public class BuildFinderBenchmarks
     [Benchmark]
     public void Benchmark1()
     {
-        List<int> requiredPerks = [];
-        List<int> requestedPerks = new() { 1 };
         var sut = buildFinder.GetBuilds([5, 8, 17, 24, 30, 36], 50);
+    }
+
+    [Benchmark]
+    public void Benchmark2()
+    {
+        var sut = buildFinder.GetBuilds([1, 16, 32], 50);
+    }
+
+    [Benchmark]
+    public void Benchmark3()
+    {
+        var sut = buildFinder.GetBuilds([16, 32, 48, 63], 50);
     }
 }

@@ -33,8 +33,6 @@ public class BuildFinderShould
     [Test]
     public void Test1()
     {
-        List<int> requiredPerks = [];
-        List<int> requestedPerks = new() { 1 };
         var sut = buildFinder.GetBuilds([5, 8, 17, 24, 30, 36], 50);
 
         Assert.That(sut, Is.Not.Null);
@@ -44,11 +42,27 @@ public class BuildFinderShould
     [Test]
     public void Test2()
     {
-        List<int> requiredPerks = [];
-        List<int> requestedPerks = new() { 1 };
         var sut = buildFinder.GetBuilds([5, 8, 17, 24, 30, 36], 20);
 
         Assert.That(sut, Is.Not.Null);
         Assert.That(sut.Count, Is.EqualTo(20));
+    }
+
+    [Test]
+    public void Test3()
+    {
+        var sut = buildFinder.GetBuilds([1, 16, 32], 50);
+
+        Assert.That(sut, Is.Not.Null);
+        Assert.That(sut.Count, Is.EqualTo(27));
+    }
+
+    [Test]
+    public void Test4()
+    {
+        var sut = buildFinder.GetBuilds([16, 32, 48, 63], 50);
+
+        Assert.That(sut, Is.Not.Null);
+        Assert.That(sut.Count, Is.EqualTo(11));
     }
 }
