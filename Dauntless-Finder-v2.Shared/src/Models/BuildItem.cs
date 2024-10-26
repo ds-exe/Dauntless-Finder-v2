@@ -2,7 +2,7 @@
 
 public class BuildItem
 {
-    public int id { get; set; }
+    public int Id { get; set; }
 
-    public List<Perk> cells { get; set; }
+    public List<int> Cells { get; set; } = [];
 }
