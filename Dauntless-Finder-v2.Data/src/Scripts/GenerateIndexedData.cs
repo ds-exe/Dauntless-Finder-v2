@@ -33,7 +33,7 @@ public class GenerateIndexedData
             AddArmour(armourData, armour);
         }
 
-        SortArmourData(armourData);
+        SortArmourData(armourData); // Important optimisation
 
         return armourData;
     }
@@ -128,6 +128,14 @@ public class GenerateIndexedData
         InitialiseDictionary(dict[key], key2);
     }
 
+    private static void InitialiseDictionary(Dictionary<int, List<BasicArmour>> dict, int key)
+    {
+        if (!dict.ContainsKey(key))
+        {
+            dict.Add(key, new List<BasicArmour>());
+        }
+    }
+
     protected static void SortArmourData(ArmourData armourData)
     {
         foreach (var dict in armourData.Heads)
@@ -166,14 +174,6 @@ public class GenerateIndexedData
             {
                 dict.Value[0] = dict.Value[0].OrderByDescending(rec => rec.Perks[dict.Key]).ToList();
             }
-        }
-    }
-
-    private static void InitialiseDictionary(Dictionary<int, List<BasicArmour>> dict, int key)
-    {
-        if (!dict.ContainsKey(key))
-        {
-            dict.Add(key, new List<BasicArmour>());
         }
     }
 }
