@@ -68,6 +68,9 @@ public class GenerateIndexedData
 
                 InitialiseDictionary(armourData.Heads, perks[2], 0, 0);
                 armourData.Heads[perks[2]][0][0].Add(basicArmour);
+
+                InitialiseDictionary(armourData.Heads, 0, 0, 0);
+                armourData.Heads[0][0][0].Add(basicArmour);
                 break;
             case ArmourType.TORSO:
                 InitialiseDictionary(armourData.Torsos, perks[0], perks[1]);
@@ -77,6 +80,9 @@ public class GenerateIndexedData
 
                 InitialiseDictionary(armourData.Torsos, perks[1], 0);
                 armourData.Torsos[perks[1]][0].Add(basicArmour);
+
+                InitialiseDictionary(armourData.Torsos, 0, 0);
+                armourData.Torsos[0][0].Add(basicArmour);
                 break;
             case ArmourType.ARMS:
                 InitialiseDictionary(armourData.Arms, perks[0], perks[1], perks[2]);
@@ -95,6 +101,9 @@ public class GenerateIndexedData
 
                 InitialiseDictionary(armourData.Arms, perks[2], 0, 0);
                 armourData.Arms[perks[2]][0][0].Add(basicArmour);
+
+                InitialiseDictionary(armourData.Arms, 0, 0, 0);
+                armourData.Arms[0][0][0].Add(basicArmour);
                 break;
             case ArmourType.LEGS:
                 InitialiseDictionary(armourData.Legs, perks[0], perks[1]);
@@ -104,6 +113,9 @@ public class GenerateIndexedData
 
                 InitialiseDictionary(armourData.Legs, perks[1], 0);
                 armourData.Legs[perks[1]][0].Add(basicArmour);
+
+                InitialiseDictionary(armourData.Legs, 0, 0);
+                armourData.Legs[0][0].Add(basicArmour);
                 break;
         }
     }
@@ -140,6 +152,10 @@ public class GenerateIndexedData
     {
         foreach (var dict in armourData.Heads)
         {
+            if (dict.Key == 0)
+            {
+                continue;
+            }
             if (dict.Value.ContainsKey(0))
             {
                 if (dict.Value[0].ContainsKey(0))
@@ -151,6 +167,10 @@ public class GenerateIndexedData
 
         foreach (var dict in armourData.Torsos)
         {
+            if (dict.Key == 0)
+            {
+                continue;
+            }
             if (dict.Value.ContainsKey(0))
             {
                 dict.Value[0] = dict.Value[0].OrderByDescending(rec => rec.Perks[dict.Key]).ToList();
@@ -159,6 +179,10 @@ public class GenerateIndexedData
 
         foreach (var dict in armourData.Arms)
         {
+            if (dict.Key == 0)
+            {
+                continue;
+            }
             if (dict.Value.ContainsKey(0))
             {
                 if (dict.Value[0].ContainsKey(0))
@@ -170,6 +194,10 @@ public class GenerateIndexedData
 
         foreach (var dict in armourData.Legs)
         {
+            if (dict.Key == 0)
+            {
+                continue;
+            }
             if (dict.Value.ContainsKey(0))
             {
                 dict.Value[0] = dict.Value[0].OrderByDescending(rec => rec.Perks[dict.Key]).ToList();

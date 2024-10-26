@@ -65,4 +65,13 @@ public class BuildFinderShould
         Assert.That(sut, Is.Not.Null);
         Assert.That(sut.Count, Is.EqualTo(11));
     }
+
+    [Test]
+    public void Test5()
+    {
+        var sut = buildFinder.GetBuilds([15], 50);
+
+        Assert.That(sut, Is.Not.Null);
+        Assert.That(sut.Count, Is.EqualTo(50));
+    }
 }

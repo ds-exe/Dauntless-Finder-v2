@@ -129,7 +129,8 @@ public class BuildFinder
         }
         if (buildComplete && isDefined)
         {
-            AddBuild(tempBuild, tempBuilds, currentPerkValues, maxBuilds);
+            tempBuild.ArmourPieces[armourType] = 0;
+            FindArmourPiece(armourType + 1, requiredPerks, maxBuilds, currentPerkValues, tempBuild, tempBuilds);
             return true;
         }
         if (!isDefined)
@@ -327,7 +328,7 @@ public class BuildFinder
         List<int> heads = [];
         if (tempBuild.ArmourPieces[ArmourType.HEAD] == 0)
         {
-            heads = armourData.Heads[0][0].Select(rec => rec.Key).ToList();
+            heads = armourData.Heads[0][0][0].Select(rec => rec.Id).ToList();
         }
         else
         {
@@ -336,7 +337,7 @@ public class BuildFinder
         List<int> torsos = [];
         if (tempBuild.ArmourPieces[ArmourType.TORSO] == 0)
         {
-            torsos = armourData.Torsos[0].Select(rec => rec.Key).ToList();
+            torsos = armourData.Torsos[0][0].Select(rec => rec.Id).ToList();
         }
         else
         {
@@ -345,7 +346,7 @@ public class BuildFinder
         List<int> arms = [];
         if (tempBuild.ArmourPieces[ArmourType.ARMS] == 0)
         {
-            arms = armourData.Arms[0][0].Select(rec => rec.Key).ToList();
+            arms = armourData.Arms[0][0][0].Select(rec => rec.Id).ToList();
         }
         else
         {
@@ -354,7 +355,7 @@ public class BuildFinder
         List<int> legs = [];
         if (tempBuild.ArmourPieces[ArmourType.LEGS] == 0)
         {
-            legs = armourData.Legs[0].Select(rec => rec.Key).ToList();
+            legs = armourData.Legs[0][0].Select(rec => rec.Id).ToList();
         }
         else
         {
