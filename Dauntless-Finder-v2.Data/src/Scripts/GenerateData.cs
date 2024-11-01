@@ -42,7 +42,7 @@ public class GenerateData
             var perk = new Perk()
             {
                 Id = id,
-                Name = record.Name,
+                Name = new Dictionary<string, string>() { { "en", record.Name } },
                 Threshold = record.Cost,
             };
 
@@ -57,7 +57,7 @@ public class GenerateData
         Dictionary<string, int> perkValues = new Dictionary<string, int>();
         foreach (var perk in data.Perks)
         {
-            perkValues.Add(perk.Value.Name, perk.Key);
+            perkValues.Add(perk.Value.Name.FirstOrDefault().Value, perk.Key);
         }
 
         int id = 1;
@@ -66,7 +66,7 @@ public class GenerateData
             data.Armours[id] = new Armour
             {
                 Id = id++,
-                Name = record.Name,
+                Name = new Dictionary<string, string>() { { "en", record.Name } },
                 Type = ArmourType.HEAD,
                 Stats = new List<Stat>()
                 {
@@ -86,7 +86,7 @@ public class GenerateData
             data.Armours[id] = new Armour
             {
                 Id = id++,
-                Name = record.Name,
+                Name = new Dictionary<string, string>() { { "en", record.Name } },
                 Type = ArmourType.TORSO,
                 Stats = new List<Stat>()
                 {
@@ -105,7 +105,7 @@ public class GenerateData
             data.Armours[id] = new Armour
             {
                 Id = id++,
-                Name = record.Name,
+                Name = new Dictionary<string, string>() { { "en", record.Name } },
                 Type = ArmourType.ARMS,
                 Stats = new List<Stat>()
                 {
@@ -125,7 +125,7 @@ public class GenerateData
             data.Armours[id] = new Armour
             {
                 Id = id++,
-                Name = record.Name,
+                Name = new Dictionary<string, string>() { { "en", record.Name } },
                 Type = ArmourType.LEGS,
                 Stats = new List<Stat>()
                 {

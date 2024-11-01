@@ -4,7 +4,7 @@ public class Perk
 {
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public Dictionary<string, string> Name { get; set; }
 
     public int Threshold { get; set; }
 }

@@ -6,7 +6,7 @@ public class Armour
 {
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public Dictionary<string, string> Name { get; set; }
 
     public ArmourType Type { get; set; }
 

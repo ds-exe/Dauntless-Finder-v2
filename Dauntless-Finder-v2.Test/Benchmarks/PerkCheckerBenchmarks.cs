@@ -48,7 +48,6 @@ public class PerkCheckerBenchmarks
         var sut = perkChecker.GetAvailablePerks(requiredPerks.ToList(), requestedPerks.ToList());
     }
 
-
     [Benchmark]
     public void RequireAllThreshold8Benchmark()
     {
