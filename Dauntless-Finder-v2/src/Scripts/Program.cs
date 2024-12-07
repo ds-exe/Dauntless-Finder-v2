@@ -4,6 +4,9 @@ public class Program
 {
     private static void Main(string[] args)
     {
+        FullPerkFinder fullPerkFinder = new FullPerkFinder();
+        fullPerkFinder.CalculateMaxPerkBuilds();
+        return;
         BruteForceChecker bruteForceChecker = new BruteForceChecker();
 
         //List<int> requiredPerks = new() { 1, 6, 3, 5 };

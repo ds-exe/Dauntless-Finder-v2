@@ -67,7 +67,7 @@ public class BruteForceFinder
                         var isComplete = IsBuildComplete(requiredPerks, currentPerkValues);
                         if (isComplete)
                         {
-                            Console.WriteLine($"{head.Name} {torso.Name} {arms.Name} {legs.Name}");
+                            Console.WriteLine($"{head.Name["en"]} {torso.Name["en"]} {arms.Name["en"]} {legs.Name["en"]}");
                             // TODO: Also add cells for better testing
                             builds.Add(new Build()
                             {

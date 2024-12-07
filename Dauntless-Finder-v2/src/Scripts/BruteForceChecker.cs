@@ -48,7 +48,7 @@ public class BruteForceChecker
                         var isComplete = IsBuildComplete(requiredPerks, currentPerkValues);
                         if (isComplete)
                         {
-                            Console.WriteLine($"{head.Name} {torso.Name} {arms.Name} {legs.Name}");
+                            Console.WriteLine($"{head.Name["en"]} {torso.Name["en"]} {arms.Name["en"]} {legs.Name["en"]}");
                             return true;
                         }
 
