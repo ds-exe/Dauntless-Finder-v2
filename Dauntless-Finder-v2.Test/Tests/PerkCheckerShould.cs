@@ -71,10 +71,11 @@ public class PerkCheckerShould
     {
         List<int> requiredPerks = [];
         List<int> requestedPerks = [];
-        for (int i = 1; i <= 80; i++)
+        for (int i = 1; i <= 81; i++)
         {
             requestedPerks.Add(i);
         }
+        requestedPerks.Remove(50);
         var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         foreach (int i in requestedPerks)
@@ -88,14 +89,15 @@ public class PerkCheckerShould
     {
         List<int> requiredPerks = [5, 8, 17, 24, 30];
         List<int> requestedPerks = [];
-        for (int i = 1; i <= 80; i++)
+        for (int i = 1; i <= 81; i++)
         {
             requestedPerks.Add(i);
         }
+        requestedPerks.Remove(50);
         requestedPerks = requestedPerks.Except(requiredPerks).ToList();
         var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
-        List<int> trueList = [4,6,9,10,11,12,18,19,20,21,23,26,27,29,31,32,33,34,35,36,37,38,39,44,45,46,47,48,51,52,54,55,56,57,58,60,63,64,65,66,67,69,70,71,73,74,77];
+        List<int> trueList = [4,6,9,11,12,18,19,20,21,23,26,27,29,31,32,33,34,35,36,37,38,39,43,44,45,46,47,48,51,52,54,55,56,57,58,60,63,64,65,66,67,69,70,71,73,74,77];
 
         foreach (int i in requestedPerks)
         {
@@ -194,7 +196,7 @@ public class PerkCheckerShould
     [Test]
     public void LimitedBuildTest()
     {
-        List<int> requestedPerks = [8, 20, 26, 32, 38, 41, 42, 46, 48, 50, 51, 55, 67];
+        List<int> requestedPerks = [8, 20, 26, 32, 38, 41, 42, 46, 48, 51, 55, 67, 80, 81];
         var sut = perkChecker.GetAvailablePerks([32, 57], requestedPerks);
 
         foreach (int i in requestedPerks)
@@ -207,11 +209,12 @@ public class PerkCheckerShould
     public void LimitedBuildTestReverse()
     {
         List<int> requestedPerks = [];
-        for (int i = 1; i <= 80; i++)
+        for (int i = 1; i <= 81; i++)
         {
             requestedPerks.Add(i);
         }
-        List<int> removedPerks = [8, 20, 26, 32, 38, 41, 42, 46, 48, 50, 51, 55, 67, 32, 57];
+        requestedPerks.Remove(50);
+        List<int> removedPerks = [8, 20, 26, 32, 38, 41, 42, 46, 48, 51, 55, 67, 32, 57, 80, 81];
         requestedPerks = requestedPerks.Except(removedPerks).ToList();
 
         var sut = perkChecker.GetAvailablePerks([32, 57], requestedPerks);
