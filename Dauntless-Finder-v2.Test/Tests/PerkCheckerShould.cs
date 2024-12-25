@@ -1,4 +1,6 @@
 ﻿using Dauntless_Finder_v2.App.src.Scripts;
+using Dauntless_Finder_v2.Shared.src.Models;
+using Dauntless_Finder_v2.Shared.src.Scripts;
 using NUnit.Framework;
 
 namespace Dauntless_Finder_v2.Test.Tests;
@@ -6,10 +8,16 @@ namespace Dauntless_Finder_v2.Test.Tests;
 public class PerkCheckerShould
 {
     PerkChecker perkChecker = new PerkChecker();
+    protected Data data { get; set; }
 
     public PerkCheckerShould()
     {
-
+        var dataTmp = FileHandler.ReadData<Data>("data.json");
+        if (dataTmp == null)
+        {
+            throw new Exception("Loading data failed.");
+        }
+        data = dataTmp;
     }
 
     [OneTimeSetUp]
@@ -70,12 +78,7 @@ public class PerkCheckerShould
     public void RequestAll()
     {
         List<int> requiredPerks = [];
-        List<int> requestedPerks = [];
-        for (int i = 1; i <= 81; i++)
-        {
-            requestedPerks.Add(i);
-        }
-        requestedPerks.Remove(50);
+        List<int> requestedPerks = data.Perks.Select(rec => rec.Key).ToList();
         var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
         foreach (int i in requestedPerks)
@@ -88,12 +91,7 @@ public class PerkCheckerShould
     public void RequireLargeQuantityValid()
     {
         List<int> requiredPerks = [5, 8, 17, 24, 30];
-        List<int> requestedPerks = [];
-        for (int i = 1; i <= 81; i++)
-        {
-            requestedPerks.Add(i);
-        }
-        requestedPerks.Remove(50);
+        List<int> requestedPerks = data.Perks.Select(rec => rec.Key).ToList();
         requestedPerks = requestedPerks.Except(requiredPerks).ToList();
         var sut = perkChecker.GetAvailablePerks(requiredPerks, requestedPerks);
 
@@ -196,7 +194,7 @@ public class PerkCheckerShould
     [Test]
     public void LimitedBuildTest()
     {
-        List<int> requestedPerks = [8, 20, 26, 32, 38, 41, 42, 46, 48, 51, 55, 67, 80, 81];
+        List<int> requestedPerks = [5, 7, 8, 9, 10, 13, 17, 20, 22, 24, 25, 26, 29, 30, 31, 34, 35, 38, 39, 41, 42, 43, 44, 45, 46, 47, 48, 51, 52, 55, 64, 66, 67, 69, 70, 71, 72, 73, 74, 76, 77, 80, 81];
         var sut = perkChecker.GetAvailablePerks([32, 57], requestedPerks);
 
         foreach (int i in requestedPerks)
@@ -208,15 +206,7 @@ public class PerkCheckerShould
     [Test]
     public void LimitedBuildTestReverse()
     {
-        List<int> requestedPerks = [];
-        for (int i = 1; i <= 81; i++)
-        {
-            requestedPerks.Add(i);
-        }
-        requestedPerks.Remove(50);
-        List<int> removedPerks = [8, 20, 26, 32, 38, 41, 42, 46, 48, 51, 55, 67, 32, 57, 80, 81];
-        requestedPerks = requestedPerks.Except(removedPerks).ToList();
-
+        List<int> requestedPerks = [1, 2, 3, 4, 6, 11, 12, 14, 15, 16, 18, 19, 21, 23, 27, 28, 33, 36, 37, 40, 49, 53, 54, 56, 58, 59, 60, 61, 62, 63, 65, 68, 75, 78, 79];
         var sut = perkChecker.GetAvailablePerks([32, 57], requestedPerks);
 
         foreach (int i in requestedPerks)

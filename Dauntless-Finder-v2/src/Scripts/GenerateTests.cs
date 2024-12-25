@@ -25,7 +25,7 @@ public class GenerateTests
         List<int> requestedPerks = data.Perks.Select(rec => rec.Key).Except(requiredPerks).ToList();
 
         List<int> validPerks = [];
-        List<int> invalidPerks = requiredPerks.ToList();
+        List<int> invalidPerks = [];
         foreach (var perk in requestedPerks)
         {
             requiredPerks.Add(perk);
